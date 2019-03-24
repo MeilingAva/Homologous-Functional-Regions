@@ -7,6 +7,7 @@ Release = V1.0-beta-20181108
 Laboratory for the Study of the Brain Basis of Individual Difference
 
 Mail to Initiator: Hesheng Liu (hesheng@nmr.mgh.harvard.edu)
+
 Programmers: Meiling Li, Danhong Wang
 
 Citing Information:
