@@ -53,6 +53,7 @@ for s = 1:length(SubIDs)
     
     mkdir([OutPath '/' sub]);
     for cnt = 1:numIter
+      
         
         mkdir([OutPath '/' sub '/Iter_' num2str(cnt)]);
 
@@ -137,11 +138,11 @@ for s = 1:length(SubIDs)
 
 
         data = [seedDatalh;lhData];
-        tmp = corrcoef(data');
+        tmp = ccmat(data');
         cValuelh = tmp(1:size(seedDatalh,1),end-2561:end)'; % 2562*seeds
 
         data = [seedDatarh;rhData];
-        tmp = corrcoef(data');
+        tmp = ccmat(data');
         cValuerh = tmp(1:size(seedDatarh,1),end-2561:end)'; % 2562*seeds 
 
         cValuelh = 0.5*log((1+cValuelh)./(1-cValuelh));
@@ -182,7 +183,11 @@ for s = 1:length(SubIDs)
 
             [cor idx] = sort(data(v,:),'descend');
             parc_membership(v) = idx(1);
-            parc_confidence(v) = cor(1)/cor(2);
+            if cor(2) ~= 0
+              parc_confidence(v) = cor(1)/cor(2);
+            else
+              parc_confidence(v) = 0.0;
+              end
 
         end
 
@@ -211,7 +216,12 @@ for s = 1:length(SubIDs)
 
             [cor idx] = sort(data(v,:),'descend');
             parc_membership(v) = idx(1);
-            parc_confidence(v) = cor(1)/cor(2);
+            if cor(2) ~= 0
+              parc_confidence(v) = cor(1)/cor(2);
+            else
+              parc_confidence(v) = 0.0;
+            end
+            
 
 
         end
@@ -231,13 +241,13 @@ for s = 1:length(SubIDs)
 
 
 
-        eval(['!cp ' ProgramPath '/Templates/Parcellation_template/lh_network_1_asym_fs4.mgh  ' OutPath '/' sub '/Iter_' num2str(cnt) '/Network_1_lh.mgh']); 
+        system(['cp ' ProgramPath '/Templates/Parcellation_template/lh_network_1_asym_fs4.mgh  ' OutPath '/' sub '/Iter_' num2str(cnt) '/Network_1_lh.mgh']); 
 
-        eval(['!cp ' ProgramPath '/Templates/Parcellation_template/rh_network_1_asym_fs4.mgh  ' OutPath '/' sub '/Iter_' num2str(cnt) '/Network_1_rh.mgh']); 
+        system(['cp ' ProgramPath '/Templates/Parcellation_template/rh_network_1_asym_fs4.mgh  ' OutPath '/' sub '/Iter_' num2str(cnt) '/Network_1_rh.mgh']); 
 
-        eval(['!cp ' ProgramPath '/Templates/Parcellation_template/lh_network_1_asym_fs4.mgh  ' OutPath '/' sub '/Iter_' num2str(cnt) '/NetworkConfidence_1_lh.mgh']);
+        system(['cp ' ProgramPath '/Templates/Parcellation_template/lh_network_1_asym_fs4.mgh  ' OutPath '/' sub '/Iter_' num2str(cnt) '/NetworkConfidence_1_lh.mgh']);
 
-        eval(['!cp ' ProgramPath '/Templates/Parcellation_template/rh_network_1_asym_fs4.mgh  ' OutPath '/' sub '/Iter_' num2str(cnt) '/NetworkConfidence_1_rh.mgh']);
+        system(['cp ' ProgramPath '/Templates/Parcellation_template/rh_network_1_asym_fs4.mgh  ' OutPath '/' sub '/Iter_' num2str(cnt) '/NetworkConfidence_1_rh.mgh']);
 
     end
 end
