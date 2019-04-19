@@ -13,7 +13,7 @@ foreach hemi($hemis)
 foreach net ($nets)
 
 # Preprocessing,smooth with 1
-mri_surf2surf --srcsubject fsaverage4 --sval ${InPath}/${sub}/Iter_$Iter/Network_${net}_${hemi}.mgh --trgsubject fsaverage4 --tval $OutPath/${sub}/Network_${net}_sm1_${hemi}.mgh --hemi $hemi --nsmooth-in 1
+mri_surf2surf --srcsubject fsaverage4 --sval ${InPath}/${sub}/Iter_${Iter}/Network_${net}_${hemi}.mgh --trgsubject fsaverage4 --tval $OutPath/${sub}/Network_${net}_sm1_${hemi}.mgh --hemi $hemi --nsmooth-in 1
 
 # Get the discrete patches
 mri_surfcluster --in ${OutPath}/${sub}/Network_${net}_sm1_${hemi}.mgh --subject fsaverage4 --hemi $hemi --thmin 0.01  --ocn ${OutPath}/${sub}/Network_${net}_sm1_Patch_${hemi}.mgh
